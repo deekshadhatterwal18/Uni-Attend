@@ -18,6 +18,9 @@ def create_subject_dialog(teacher_id):
                 st.toast("Subject Created Succesfully!")
                 st.rerun()
             except Exception as e:
-                st.error(f"Error: {str(e)}")
+                if "unique_subject_code" in str(e):
+                    st.error("Subject code already exists. Please use another code.")
+                else:
+                    st.error(f"Error: {str(e)}")
         else:
             st.warning("Please fill all the fields")
