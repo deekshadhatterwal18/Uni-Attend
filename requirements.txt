@@ -1,26 +1,21 @@
 streamlit
-# Utilitites 
+
+# Utilities
 numpy
 pandas
 
 # FACE RECOGNITION
 scikit-learn
-dlib
-
+https://github.com/z-mahmud22/Dlib_Windows_Python3.x/releases/download/v19.24.6/dlib-19.24.6-cp311-cp311-linux_x86_64.whl
 face_recognition
 face_recognition_models
 setuptools
 wheel
 
+# DATABASE
 supabase
 bcrypt
-
-
-
 segno
 pillow
-
-
-
 librosa
 resemblyzer
