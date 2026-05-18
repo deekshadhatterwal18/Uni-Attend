@@ -4,28 +4,23 @@ import io
 import librosa
 import streamlit as st
 
-@st.cache_resource
+_encoder = None
+
 def load_voice_encoder():
-    return VoiceEncoder()
+    global _encoder
+    if _encoder is None:
+        _encoder = VoiceEncoder()
+    return _encoder
 
 def get_voice_embedding(audio_bytes):
     try:
-        encoder = load_voice_encoder()
-        
         if not audio_bytes or len(audio_bytes) == 0:
-            st.error('Audio bytes empty hai!')
             return None
         
-        st.info(f'Audio bytes received: {len(audio_bytes)}')
-        
+        encoder = load_voice_encoder()
         audio, sr = librosa.load(io.BytesIO(audio_bytes), sr=16000)
-        
-        st.info(f'Audio loaded, duration: {len(audio)/sr:.2f}s')
-        
         wav = preprocess_wav(audio)
         embedding = encoder.embed_utterance(wav)
-        
-        st.success('Voice embedding created!')
         return embedding.tolist()
     
     except Exception as e:
