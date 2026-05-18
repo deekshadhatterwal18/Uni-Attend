@@ -152,11 +152,11 @@ def student_screen():
             st.subheader('Optional : Voice Enrollment')
             st.info("Enroll your voice for voice only attendance")
 
-            audio_data = None
-            try:
-                audio_data = st.audio_input('Record a short phrase like I am present, My name is Akash.')
-            except Exception:
-                st.error('Audio Data failed!')
+            audio_data = st.audio_input('Record a short phrase like I am present, My name is Akash.')
+
+            
+            if audio_data:
+                st.session_state['reg_audio'] = audio_data.read()
 
             if st.button('Create Account', type='primary'):
                 if new_name:
@@ -166,8 +166,12 @@ def student_screen():
                         if encodings:
                             face_emb = encodings[0].tolist()
                             voice_emb = None
-                            if audio_data:
-                                voice_emb = get_voice_embedding(audio_data.read())
+
+                            
+                            if 'reg_audio' in st.session_state:
+                                voice_emb = get_voice_embedding(st.session_state['reg_audio'])
+                                del st.session_state['reg_audio']
+
                             response_data = create_student(new_name, face_embedding=face_emb, voice_embedding=voice_emb)
                             if response_data:
                                 train_classifier()
