@@ -12,10 +12,22 @@ def main():
         else:
             st.session_state['login_type'] = None
 
+    # ✅ join-code ko bachao clear hone se
+    join_code = st.query_params.get("join-code", None)
+    if join_code:
+        st.session_state['pending_join_code'] = join_code
+
     if st.session_state['login_type']:
         st.query_params["role"] = st.session_state['login_type']
     else:
-        st.query_params.clear()
+        # ✅ sirf role clear karo, join-code nahi
+        if "role" in st.query_params:
+            del st.query_params["role"]
+
+    # ✅ QR se aaya to automatically student screen pe bhejo
+    if join_code and st.session_state['login_type'] is None:
+        st.session_state['login_type'] = 'student'
+        st.rerun()
 
     match st.session_state['login_type']:
         case 'teacher':

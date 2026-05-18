@@ -152,11 +152,14 @@ def student_screen():
             st.subheader('Optional : Voice Enrollment')
             st.info("Enroll your voice for voice only attendance")
 
-            audio_data = st.audio_input('Record a short phrase like I am present, My name is Akash.')
+            audio_widget = st.audio_input('Record a short phrase like I am present, My name is Akash.')
 
-            
-            if audio_data:
-                st.session_state['reg_audio'] = audio_data.read()
+            # ✅ .getvalue() use karo .read() ki jagah
+            if audio_widget is not None:
+                bytes_data = audio_widget.getvalue()
+                if bytes_data:
+                    st.session_state['reg_audio'] = bytes_data
+                    st.success("✅ Voice recorded! Now click Create Account.")
 
             if st.button('Create Account', type='primary'):
                 if new_name:
@@ -167,9 +170,10 @@ def student_screen():
                             face_emb = encodings[0].tolist()
                             voice_emb = None
 
-                            
                             if 'reg_audio' in st.session_state:
-                                voice_emb = get_voice_embedding(st.session_state['reg_audio'])
+                                voice_emb = get_voice_embedding(
+                                    st.session_state['reg_audio']
+                                )
                                 del st.session_state['reg_audio']
 
                             response_data = create_student(new_name, face_embedding=face_emb, voice_embedding=voice_emb)
