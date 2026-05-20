@@ -59,7 +59,7 @@ def predict_attendance(class_image_np, threshold=0.55):  # ✅ 0.45 → 0.55 (re
     encodings = get_face_embeddings(class_image_np)
     detected_student = {}
     
-    # ✅ Cache clear karo taaki latest student data mile
+    #  Cache clear karo taaki latest student data mile
     model_data = get_trained_model()
     
     if not model_data:
