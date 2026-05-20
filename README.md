@@ -286,9 +286,26 @@ streamlit run app.py
 - Cloud deployment at university scale
 
 ---
+
 # 👨‍💻 Author
 
 Developed by Deeksha Dhatterwal
+
+---
+
+# 👨‍💻 Connect With Me
+
+<p align="center">
+
+  <a href="https://www.linkedin.com/in/deeksha-dhatterwal-a13684294/">
+    <img src="https://img.shields.io/badge/LinkedIn-Deeksha%20Dhatterwal-blue?style=for-the-badge&logo=linkedin">
+  </a>
+
+  <a href="mailto:deekshadhatterwal150477@gmail.com">
+    <img src="https://img.shields.io/badge/Email-Contact-red?style=for-the-badge&logo=gmail">
+  </a>
+
+</p>
 
 ---
 
